@@ -5,6 +5,7 @@ import (
 	"github.com/qsnake66/ProductWerehouse/pkg/repository"
 )
 
+//go:generate mockery --name=Product --output=./mocks --outpkg=mocks
 type Product interface {
 	CreateProduct(product SarkorTest.Product) (int, error)
 	GetProductById(id int) (SarkorTest.Product, error)

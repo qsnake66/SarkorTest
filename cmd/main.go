@@ -7,7 +7,6 @@ import (
 	"github.com/qsnake66/ProductWerehouse/pkg/handler"
 	"github.com/qsnake66/ProductWerehouse/pkg/repository"
 	"github.com/qsnake66/ProductWerehouse/pkg/service"
-	"github.com/spf13/viper"
 	"log"
 	"os"
 	"os/signal"
@@ -16,19 +15,15 @@ import (
 
 func main() {
 
-	if err := InitConfig(); err != nil {
-		log.Fatalf("error init config: %s", err.Error())
-	}
-
 	if err := godotenv.Load(); err != nil {
 		log.Fatalf("error loading .env file: %s", err.Error())
 	}
 
 	DbConfig := repository.DatabaseConfig{
-		Host:     viper.GetString("db.host"),
-		Port:     viper.GetString("db.port"),
-		Username: viper.GetString("db.username"),
-		DBName:   viper.GetString("db.dbname"),
+		Host:     os.Getenv("DB_HOST"),
+		Port:     os.Getenv("DB_PORT"),
+		Username: os.Getenv("DB_USERNAME"),
+		DBName:   os.Getenv("DB_NAME"),
 		Password: os.Getenv("DB_PASSWORD"),
 	}
 
@@ -41,7 +36,7 @@ func main() {
 	server := new(SarkorTest.Server)
 
 	go func() {
-		if err := server.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
+		if err := server.Run(os.Getenv("PORT"), handlers.InitRoutes()); err != nil {
 			log.Fatalf("error run server: %s", err.Error())
 		}
 	}()
@@ -66,10 +61,4 @@ func main() {
 	if err = sqlDB.Close(); err != nil {
 		log.Fatalf("failed to close database connection: %v", err)
 	}
-}
-
-func InitConfig() error {
-	viper.AddConfigPath("configs")
-	viper.SetConfigName("config")
-	return viper.ReadInConfig()
 }

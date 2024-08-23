@@ -16,7 +16,6 @@ func NewProductService(repo repository.Product) *ProductService {
 func (p *ProductService) CreateProduct(product SarkorTest.Product) (int, error) {
 	return p.Repo.CreateProduct(product)
 }
-
 func (p *ProductService) GetProductById(id int) (SarkorTest.Product, error) {
 	return p.Repo.GetProductById(id)
 }

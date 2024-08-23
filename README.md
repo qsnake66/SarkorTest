@@ -28,6 +28,7 @@
 - **PostgreSQL**: Система управления базами данных.
 - **GORM**: ORM для работы с PostgreSQL.
 - **golang-migrate**: Инструмент для управления миграциями базы данных.
+- **Mockery**: Инструмент для мок - тестирования
 
 ## Инструкция по запуску
 
@@ -63,7 +64,30 @@
 
 ```dotenv
 DB_PASSWORD=yourpassword
+DB_USER=username
+DB_PASSWORD=password
+DB_NAME=warehouse
+DB_HOST=localhost
+DB_PORT=5432
+PORT=8080
 ```
 
-В файле config.yml укажите порт на которому будет запущен сервер. А также необходимые параметры для подключения к базе данных
+### Запуск приложения
+
+   ```bash
+    go run cmd/main.go
+   ```
+
+### Запуск через docker
+
+   ```bash
+   docker-compose up --build
+   ```
+
+
+
+
+
+
+
 
