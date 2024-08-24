@@ -40,7 +40,7 @@
 2. **Создайте базу данных**:
    - Откройте командную строку и выполните команду:
      ```bash
-     psql -U postgres -c "CREATE DATABASE warehouse;"
+     psql -U postgres -c "CREATE DATABASE yourdbname;"
      ```
 
 ### Установка зависимостей
@@ -56,7 +56,7 @@
    - Следуйте инструкциям на https://github.com/golang-migrate/migrate для установки.
    - Используйте команду
    ```bash
-    migrate -database "postgres://yourusername:yourpassword@yourhost:yourport/warehouse?sslmode=disable" -path db/migrations up
+    migrate -database "postgres://yourusername:yourpassword@yourhost:yourport/yourdbname?sslmode=disable" -path db/migrations up
     ```
 ### Настройка переменных окружения
 
@@ -65,8 +65,7 @@
 ```dotenv
 DB_PASSWORD=yourpassword
 DB_USER=username
-DB_PASSWORD=password
-DB_NAME=warehouse
+DB_NAME=yourdbname
 DB_HOST=localhost
 DB_PORT=5432
 PORT=8080
