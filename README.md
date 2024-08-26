@@ -82,6 +82,9 @@ PORT=8080
 ## 2 Способ
 
 ### Запуск через docker
+  ```bash
+   git clone https://github.com/qsnake66/SarkorTest
+   ```
 
    ```bash
    docker-compose up --build
