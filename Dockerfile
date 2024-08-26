@@ -3,6 +3,7 @@ FROM golang:1.22
 
 # Установка рабочей директории
 WORKDIR /app
+ENV GOPATH=/
 
 # Копирование файлов
 COPY go.mod go.sum ./

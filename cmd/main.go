@@ -7,7 +7,6 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/joho/godotenv"
 	SarkorTest "github.com/qsnake66/ProductWerehouse"
 	"github.com/qsnake66/ProductWerehouse/pkg/handler"
 	"github.com/qsnake66/ProductWerehouse/pkg/repository"
@@ -15,10 +14,6 @@ import (
 )
 
 func main() {
-
-	if err := godotenv.Load(); err != nil {
-		log.Fatalf("error loading .env file: %s", err.Error())
-	}
 
 	DbConfig := repository.DatabaseConfig{
 		Host:     os.Getenv("DB_HOST"),
