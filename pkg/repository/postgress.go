@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+	"database/sql"
+	_ "github.com/lib/pq"
 	"log"
 )
 
@@ -14,17 +14,22 @@ type DatabaseConfig struct {
 	Password string
 }
 
-func InitDB(config DatabaseConfig) *gorm.DB {
+func InitDB(config DatabaseConfig) *sql.DB {
 	dsn := "host=" + config.Host +
 		" port=" + config.Port +
 		" user=" + config.Username +
 		" dbname=" + config.DBName +
 		" password=" + config.Password +
 		" sslmode=disable"
+	db, err := sql.Open("postgres", dsn)
 
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("Error connecting to database: %s", err.Error())
+	}
+
+	err = db.Ping()
+	if err != nil {
+		log.Fatalf("Failed to ping database: %s", err.Error())
 	}
 
 	return db

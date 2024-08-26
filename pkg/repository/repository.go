@@ -1,8 +1,9 @@
 package repository
 
 import (
+	"database/sql"
+
 	SarkorTest "github.com/qsnake66/ProductWerehouse"
-	"gorm.io/gorm"
 )
 
 type Product interface {
@@ -17,6 +18,6 @@ type Repository struct {
 	Product
 }
 
-func NewRepository(db *gorm.DB) *Repository {
+func NewRepository(db *sql.DB) *Repository {
 	return &Repository{Product: NewProductPostgresRepository(db)}
 }

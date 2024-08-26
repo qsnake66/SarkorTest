@@ -2,15 +2,16 @@ package main
 
 import (
 	"context"
+	"log"
+	"os"
+	"os/signal"
+	"syscall"
+
 	"github.com/joho/godotenv"
 	SarkorTest "github.com/qsnake66/ProductWerehouse"
 	"github.com/qsnake66/ProductWerehouse/pkg/handler"
 	"github.com/qsnake66/ProductWerehouse/pkg/repository"
 	"github.com/qsnake66/ProductWerehouse/pkg/service"
-	"log"
-	"os"
-	"os/signal"
-	"syscall"
 )
 
 func main() {
@@ -53,12 +54,7 @@ func main() {
 		log.Fatalf("error shutting down server: %s", err.Error())
 	}
 
-	sqlDB, err := db.DB()
-	if err != nil {
-		log.Fatalf("failed to retrieve database connection: %v", err)
-	}
-
-	if err = sqlDB.Close(); err != nil {
+	if err := db.Close(); err != nil {
 		log.Fatalf("failed to close database connection: %v", err)
 	}
 }
